@@ -218,8 +218,12 @@ def check_priority_operation(array):
             result.append(elem)
         else:
             check = elem.find("X")
+            check_sign = elem.find("-")
+            check_zero = elem.find("0")
             elem = ft_atoi(tmp)
-            if (check != -1 and elem == 0):
+            if (check != -1 and elem == 0 and check_sign != -1 and check_zero == -1):
+                elem = -1
+            elif (check != -1 and elem == 0 and check_zero == -1):
                 elem = 1
             result.append(elem)
     res = 0
