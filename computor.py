@@ -12,6 +12,41 @@ def handle_multi(elem):
             if (i == "*"):
                 print("ERROR: don't handle parenthesis ...")
                 exit()
+    if (elem.find("/") != -1): 
+        a = 0
+        b = 0
+        sign = 1
+        boo = 0
+        for i in elem:
+            if (i == "-" and boo == 0):
+                sign = -1
+            elif (i.isdigit() and boo == 0):
+                a = int(a) * 10 + int(i)
+            elif (i == "/"):
+                break
+        index = elem.index("/") + 1
+        boo = 0
+        sign = 1
+        a = a * sign
+        up = 0
+        bef = ""
+        for i in elem[index:]:
+            if (i == "-" and boo == 0):
+                sign = -1
+            elif (i.isdigit() and boo == 0):
+                b = int(b) * 10 + int(i)
+            elif (i == "^"):
+                bef = i
+            elif (bef == "^" and i.isdigit()):
+                up = i
+        b = b * sign
+        if (b == 0): 
+            print("ERROR: division by zero")
+            exit()
+        if (up == 0 and elem[index:].find("X") != -1): 
+            up = 1
+        value = int(a) / int(b) 
+        return (str(str(value) + "X^" + str(up)))
     return (elem)
     
 def handle_div(elem):
@@ -58,6 +93,9 @@ def handle_div(elem):
         print("Invalid Equation")
         exit()
     else :
+        if (int(b) == 0):
+           print("ERROR: division by zero")
+           exit()
         value = int(a) / int(b) 
         return (str(str(value) + "X^" + str(up - down)))
 
@@ -68,6 +106,7 @@ def x_edgecases_handler(array):
     for elem in array:
         if (elem.find("X") != -1 and (elem.find("*") != -1 or elem.find("/") != -1)):
             if (elem.find("*") != -1):
+                print("here")
                 nb = elem.count("X")
                 if (nb >= 3):
                     print("Invalid Equation")
@@ -215,10 +254,10 @@ def check_priority_operation(array):
                     tmp = list(elem)
             result.append(elem)
         elif (elem.find("/") > 0):
+            print("here")
             elem = do_priority_operation(tmp)
             result.append(elem)
         elif (elem.find(".") > 0):
-            print("here: ", tmp)
             elem = ft_atof(tmp)
             result.append(elem)
         else:
@@ -273,11 +312,10 @@ def parse_eq(equation, x0, x1, x2):
             x0.append(str(elem))
 
 ## do priority operation and transform all the elem in int; #handle "/" and all its edge case
-    print("test: ", x0)
+    print(x1)
     x0 = check_priority_operation(x0)
     x1 = check_priority_operation(x1)
     x2 = check_priority_operation(x2)
-    print("after: ", x0)
     return (x0, x1, x2)
 
 
