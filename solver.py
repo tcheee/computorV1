@@ -2,7 +2,6 @@ import math
 from drawer import draw
 
 def solver(a, b, c):
-    print(a)
     print("\nReduced form: %.2fX^2 + %.2fX^1 + %.2f = 0\n" % (float(a), float(b), float(c)))
     if (a == 0 and b == 0):
         if (c == 0):
