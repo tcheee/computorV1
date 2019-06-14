@@ -30,7 +30,7 @@ def solver(a, b, c):
             if (ans == "yes"):
                 draw(a, b, c)
         elif delta == 0:
-            x1 = -b / 2 * a
+            x1 = -b / (2 * a)
             print("\nx = " + str(x1))
             ans = input('Do you want a graph, yes or no? : ')
             if (ans == "yes"):

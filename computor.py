@@ -134,6 +134,9 @@ def do_priority_operation(list):
     if (boo == 1):
         return (a * b)
     elif (boo == 2):
+        if (b == 0):
+            print("ERROR: division by zero")
+            exit()
         return (a / b)
     elif (boo == 3):
         rest = "".join(map(str, list[ind:]))
@@ -252,9 +255,7 @@ def parse_eq(equation, x0, x1, x2):
         bef = x
     tmp.append(ret)
 
-    print(tmp)
     tmp = x_edgecases_handler(tmp) ##check if X^2 * X or X^5/X^2
-    print(tmp)
 
     for elem in tmp:
         if re.findall('X\^[3-9]', elem) or re.findall('X\^[1-9][0-9]', elem):
@@ -270,7 +271,6 @@ def parse_eq(equation, x0, x1, x2):
             x0.append(str(elem))
 
 ## do priority operation and transform all the elem in int; #handle "/" and all its edge case
-    print("X^2: ", x2)
     x0 = check_priority_operation(x0)
     x1 = check_priority_operation(x1)
     x2 = check_priority_operation(x2)
@@ -317,9 +317,6 @@ if (len(equal) == 1 and len(forbidden) == 0):
     a = x2l - x2r
     b = x1l - x1r
     c = x0l - x0r
-    print("a = ", a)
-    print("b = ", b)
-    print("c = ", c)
     solver(a, b, c)
 else:
     print("Invalid equation")
