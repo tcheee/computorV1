@@ -150,6 +150,7 @@ def ft_atoi(list):
     sign = 1
     a = 0
 
+    print(list)
     if (len(list) == 2):
         if (list[0] == "-"):
             sign = -1
@@ -207,7 +208,7 @@ def check_priority_operation(array):
     result = list()
     for elem in array:
         tmp = list(elem)
-        if (elem.find("*") > 0):
+        if (elem.find("*") > 0 and elem.find("X") != -1):
             while (type(elem) is not(int)):
                 elem = do_priority_operation(tmp)
                 if (type(elem) is str):
@@ -217,6 +218,7 @@ def check_priority_operation(array):
             elem = do_priority_operation(tmp)
             result.append(elem)
         elif (elem.find(".") > 0):
+            print("here: ", tmp)
             elem = ft_atof(tmp)
             result.append(elem)
         else:
@@ -271,9 +273,11 @@ def parse_eq(equation, x0, x1, x2):
             x0.append(str(elem))
 
 ## do priority operation and transform all the elem in int; #handle "/" and all its edge case
+    print("test: ", x0)
     x0 = check_priority_operation(x0)
     x1 = check_priority_operation(x1)
     x2 = check_priority_operation(x2)
+    print("after: ", x0)
     return (x0, x1, x2)
 
 
